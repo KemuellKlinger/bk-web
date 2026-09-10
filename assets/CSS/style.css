@@ -1,0 +1,461 @@
+/* Paleta de Cores Black Shark:
+    #0D0D0D (Fundo Principal - Preto)
+    #032940 (Azul Marinho / Headers e Cards)
+    #00A8E8 (Azul Oceano / Destaques e Links)
+    #F2F2F2 (Texto Principal)
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root{
+    --preto:  #0D0D0D; /*(Fundo Principal - Preto)*/
+    --azul-marinho:  #032940;  /*(Azul Marinho / Headers e Cards)*/
+    --Azul-oceano: #00A8E8 ; /*(Azul Oceano / Destaques e Links)*/
+    --texto-principal: #F2F2F2; /*Branco*/
+
+}
+
+body {
+    background-color: var(--preto);
+    color: var(--texto-principal);
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+}
+
+/* Cabeçalho e Navegação */
+header {
+    background-color: rgba(3, 41, 64, 0.95);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: #F2F2F2;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--Azul-oceano);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0px 0px 4px rgba(0, 168, 232, 0.4));
+}
+
+.logo-text {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #F2F2F2;
+    text-transform: uppercase;
+}
+
+.logo-text span {
+    color: var(--Azul-oceano);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.link {
+    color: #F2F2F2;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    padding: 5px 0;
+    position: relative;
+}
+
+.link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--Azul-oceano);
+    transition: width 0.3s ease;
+}
+
+.link:hover {
+    color: var(--Azul-oceano);
+}
+
+.link:hover::after {
+    width: 100%;
+}
+
+/* Corpo / Seções */
+main {
+    margin-top: 75px;
+}
+ 
+section {
+    min-height: 80vh;
+    padding: 5rem 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ==========================================
+   SEÇÃO SOBRE NÓS & CARROSSEL 3D
+   ========================================== */
+.about-lead {
+    margin-bottom: 2rem;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+}
+
+.carousel-container {
+    width: 60%;
+    height: 320px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-card {
+    position: absolute;
+    width: 280px;
+    height: 190px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid var(--Azul-oceano);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    opacity: 0;
+    transform: scale(0.5) translateX(0);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.carousel-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Camadas de Posição do Carrossel */
+.carousel-card.active {
+    opacity: 1;
+    transform: scale(1.15) translateX(0);
+    z-index: 10;
+    border-color: var(--Azul-oceano);
+    box-shadow: 0 0 22px rgba(0, 168, 232, 0.6);
+}
+
+.carousel-card.next {
+    opacity: 0.75;
+    transform: scale(0.85) translateX(160px);
+    z-index: 5;
+    filter: brightness(0.7);
+}
+
+.carousel-card.prev {
+    opacity: 0.75;
+    transform: scale(0.85) translateX(-160px);
+    z-index: 5;
+    filter: brightness(0.7);
+}
+
+.carousel-card.far-next {
+    opacity: 0.35;
+    transform: scale(0.65) translateX(290px);
+    z-index: 2;
+    filter: brightness(0.4);
+}
+
+.carousel-card.far-prev {
+    opacity: 0.35;
+    transform: scale(0.65) translateX(-290px);
+    z-index: 2;
+    filter: brightness(0.4);
+}
+
+.info-text {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: rgba(3, 41, 64, 0.4);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 3px solid var(--Azul-oceano);
+}
+
+/* ==========================================
+   CARDS DAS TEMPORADAS (VIDRO FOSCO)
+   ========================================== */
+
+#unearthed {
+    background-image: url(../IMG/Temporadas/UNEARTHED\ Logo.webp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#bioglow {
+    background-image: url(../IMG/Temporadas/fll-bioglow-card.webp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#treino {
+    background-image: url(../IMG/Temporadas/banner-robotiquer.webp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#unearthed::before, 
+#bioglow::before, 
+#treino::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(3, 41, 64, 0.72);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+.section-desc {
+    margin-bottom: 2rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.card {
+    border: 0.1px solid rgba(0, 166, 232, 0.747);
+    border-radius: 10px;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 220px;
+}
+
+.card a {
+    text-decoration: none;
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--Azul-oceano);
+    box-shadow: 0 8px 20px rgba(0, 168, 232, 0.3);
+}
+
+/* Tag FLL arrumada para ficar no canto dentro do Card */
+.card-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--Azul-oceano);
+    color: var(--preto);
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    z-index: 3;
+}
+
+.card h3 {
+    font-size: 1.4rem;
+    color: var(--texto-principal);
+    margin-bottom: 0.2rem;
+}
+
+.season-year {
+    color: var(--Azul-oceano);
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: #d1d1d1;
+}
+
+/* Alternância de cores das seções */
+section:nth-child(odd) {
+    background-color: var(--preto);
+}
+
+section:nth-child(even) {
+    background-color: var(--azul-marinho);
+    border-top: 1px solid rgba(0, 168, 232, 0.2);
+    border-bottom: 1px solid rgba(0, 168, 232, 0.2);
+}
+
+h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+    color: #F2F2F2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-left: 5px solid var(--Azul-oceano);
+    padding-left: 15px;
+}
+
+p {
+    font-size: 1.05rem;
+    max-width: 850px;
+    color: #d1d1d1;
+}
+
+/* Rodapé */
+footer {
+    background-color: #061824;
+    color: #F2F2F2;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    border-top: 1px solid var(--azul-marinho);
+    font-size: 0.9rem;
+}
+
+footer>p{
+    max-width: 100%;
+}
+
+footer img{
+    width: 10%;
+    height: auto;
+}
+
+footer strong {
+    color: var(--Azul-oceano);
+}
+
+/* ==========================================
+   RESPONSIVIDADE (Telas Menores / Celulares)
+   ========================================== */
+@media (max-width: 900px) {
+    header {
+        padding: 0.8rem 4%;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+
+    .link {
+        font-size: 0.8rem;
+    }
+
+    .about-content {
+        flex-direction: column;
+    }
+
+    .carousel-container {
+        width: 100%;
+        height: 260px;
+    }
+
+    .info-text {
+        width: 100%;
+    }
+
+    .carousel-card {
+        width: 210px;
+        height: 140px;
+    }
+
+    .carousel-card.next {
+        transform: scale(0.8) translateX(100px);
+    }
+
+    .carousel-card.prev {
+        transform: scale(0.8) translateX(-100px);
+    }
+
+    .carousel-card.far-next,
+    .carousel-card.far-prev {
+        opacity: 0; /* Oculta a 2ª camada lateral no celular para não cortar na tela */
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        position: relative; /* Evita cobrir o topo em telas muito pequenas */
+    }
+
+    main {
+        margin-top: 0;
+    }
+
+    section {
+        padding: 3rem 5%;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+}
